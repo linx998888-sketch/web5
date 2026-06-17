@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>線上運動教練訓練課程</title>
+
+  <style>
+    /* CSS:BASE-START */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Microsoft JhengHei", Arial, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background: #f8fbff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #0f172a;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 2.5rem;
+    }
+
+    .primary-button,
+    .secondary-button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.9rem 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .primary-button {
+      background: #f97316;
+      color: #ffffff;
+    }
+
+    .secondary-button {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .primary-button:hover,
+    .secondary-button:hover {
+      transform: translateY(-3px);
+      opacity: 0.9;
+    }
+    /* CSS:BASE-END */
+
+    /* CSS:HEADER-START */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    .header-inner {
+      height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #0284c7;
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .menu-button {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #0284c7;
+    }
+    /* CSS:HEADER-END */
+
+    /* CSS:HERO-START */
+    .hero-section {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: #dcfce7;
+      color: #15803d;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      color: #0f172a;
+    }
+
+    .hero-text {
+      font-size: 1.1rem;
+      color: #475569;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .hero-card {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px rgba(2, 132, 199, 0.15);
+    }
+
+    .hero-card-title {
+      color: #0284c7;
+      margin-bottom: 1rem;
+    }
+
+    .hero-feature {
+      margin-bottom: 0.8rem;
+      color: #334155;
+    }
+    /* CSS:HERO-END */
+
+    /* CSS:ABOUT-START */
+    .about-section {
+      padding: 5rem 0;
+      background: #ffffff;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .about-card {
+      padding: 2rem;
+      border-radius: 1.5rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .about-card-title {
+      color: #0284c7;
+      margin-bottom: 1rem;
+    }
+    /* CSS:ABOUT-END */
+
+    /* CSS:SKILLS-START */
+    .skills-section {
+      padding: 5rem 0;
+      background: #f0f9ff;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background: #ffffff;
+      border: 1px solid #dbeafe;
+      border-radius: 1.3rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(14, 165, 233, 0.15);
+    }
+
+    .skill-title {
+      color: #0369a1;
+      margin-bottom: 0.8rem;
+      font-size: 1.05rem;
+    }
+
+    .skill-content {
+      display: none;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    .skill-card.active .skill-content {
+      display: block;
+      margin-top: 1rem;
+    }
+    /* CSS:SKILLS-END */
+
+    /* CSS:PROJECTS-START */
+    .projects-section {
+      padding: 5rem 0;
+      background: #ffffff;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border-radius: 1.5rem;
+      background: #f8fafc;
+      padding: 2rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .project-title {
+      color: #0284c7;
+      margin-bottom: 1rem;
+    }
+
+    .project-more {
+      display: none;
+      margin-top: 1rem;
+      color: #64748b;
+    }
+
+    .project-card.active .project-more {
+      display: block;
+    }
+
+    .project-button {
+      margin-top: 1.2rem;
+      border: none;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    /* CSS:PROJECTS-END */
+
+    /* CSS:CONTACT-START */
+    .contact-section {
+      padding: 5rem 0;
+      background: #f0f9ff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+    }
+
+    .contact-info,
+    .contact-form {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .contact-info-title,
+    .form-title {
+      color: #0284c7;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.8rem;
+      padding: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .error-message {
+      color: #dc2626;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      min-height: 1.2rem;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 1rem;
+      color: #15803d;
+      font-weight: 700;
+    }
+    /* CSS:CONTACT-END */
+
+    /* CSS:FOOTER-START */
+    .site-footer {
+      padding: 2rem 0;
+      text-align: center;
+      background: #0f172a;
+      color: #ffffff;
+    }
+    /* CSS:FOOTER-END */
+
+    /* CSS:BACKTOTOP-START */
+    .back-top-button {
+      position: fixed;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.3);
+    }
+
+    .back-top-button.show {
+      display: block;
+    }
+    /* CSS:BACKTOTOP-END */
+
+    /* CSS:RWD-START */
+    @media (max-width: 900px) {
+      .hero-inner,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .nav-list {
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: #ffffff;
+        padding: 1rem 2rem;
+        display: none;
+      }
+
+      .nav-list.active {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .primary-button,
+      .secondary-button {
+        width: 100%;
+      }
+    }
+    /* CSS:RWD-END */
+  </style>
+</head>
+
+<body>
+  <!-- SECTION:HEADER-START -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo">FitCoach Online</a>
+
+      <button class="menu-button" type="button" aria-label="開啟選單">☰</button>
+
+      <nav class="site-nav">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#about">講師介紹</a></li>
+          <li><a class="nav-link" href="#skills">課程內容</a></li>
+          <li><a class="nav-link" href="#projects">學員成果</a></li>
+          <li><a class="nav-link" href="#contact">立即報名</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- SECTION:HEADER-END -->
+
+  <!-- SECTION:HERO-START -->
+  <section class="hero-section">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <span class="hero-badge">線上運動教練培訓</span>
+        <h1 class="hero-title">從零開始，學會線上帶課與運動指導</h1>
+        <p class="hero-text">
+          學習課程設計、動作指導、學員互動與線上教學技巧，
+          打造可實際接案的運動教練能力。
+        </p>
+
+        <div class="hero-actions">
+          <button class="primary-button scroll-button" type="button" data-target="contact">立即報名</button>
+          <button class="secondary-button scroll-button" type="button" data-target="skills">查看課程內容</button>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h2 class="hero-card-title">你將學會</h2>
+        <p class="hero-feature">✅ 線上課程設計</p>
+        <p class="hero-feature">✅ 動作評估與指導</p>
+        <p class="hero-feature">✅ 學員互動與管理</p>
+        <p class="hero-feature">✅ 教練品牌與接案能力</p>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION:HERO-END -->
+
+  <!-- SECTION:ABOUT-START -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <h2 class="section-title">About 講師介紹</h2>
+      <p class="section-subtitle">用專業、實務與陪伴，幫助你建立教練能力。</p>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <h3 class="about-card-title">講師背景故事</h3>
+          <p>
+            擁有超過 10 年運動指導與健康促進實務經驗，曾協助企業、社區及個人學員建立正確運動習慣。
+            長期投入線上教學與教練培訓，累積豐富帶課經驗，了解學員從學習到實際應用所面臨的挑戰。
+          </p>
+        </div>
+
+        <div class="about-card">
+          <h3 class="about-card-title">教學核心理念</h3>
+          <p>
+            相信每個人都能成為專業運動教練。透過系統化教學、實務演練與案例分析，
+            幫助學員快速掌握教學技巧、課程規劃能力與學員溝通能力，建立可持續發展的教練職涯。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION:ABOUT-END -->
+
+  <!-- SECTION:SKILLS-START -->
+  <section class="skills-section" id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills 課程核心能力</h2>
+      <p class="section-subtitle">點擊卡片，可展開查看更多介紹。</p>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3 class="skill-title">人體解剖學與運動生理學</h3>
+          <p class="skill-content">認識肌肉系統、關節運作與運動生理機制，建立安全指導基礎。</p>
+        </div>
+
+        <div class="skill-card">
+          <h3 class="skill-title">課程設計與訓練規劃</h3>
+          <p class="skill-content">學習設計完整訓練菜單、週期化課程與不同程度學員的訓練安排。</p>
+        </div>
+
+        <div class="skill-card">
+          <h3 class="skill-title">動作評估與指導技巧</h3>
+          <p class="skill-content">提升動作品質分析、錯誤修正與口語提示能力。</p>
+        </div>
+
+        <div class="skill-card">
+          <h3 class="skill-title">線上帶課與互動教學</h3>
+          <p class="skill-content">掌握直播課程、遠距教學節奏、鏡頭前示範與學員互動技巧。</p>
+        </div>
+
+        <div class="skill-card">
+          <h3 class="skill-title">教練品牌經營與學員開發</h3>
+          <p class="skill-content">建立個人品牌、招生文案、學員追蹤與接案服務流程。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION:SKILLS-END -->
+
+  <!-- SECTION:PROJECTS-START -->
+  <section class="projects-section" id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects 學員成果展示</h2>
+      <p class="section-subtitle">點擊按鈕，可展開完整案例內容。</p>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <h3 class="project-title">零基礎成功轉職運動教練</h3>
+          <p>從一般上班族開始學習，完成課程後成功取得教練資格，並開始接案授課。</p>
+          <p class="project-more">
+            透過基礎動作訓練、教案設計與實務演練，學員逐步建立自信，最後完成自己的第一堂線上課程。
+          </p>
+          <button class="project-button" type="button">查看更多</button>
+        </article>
+
+        <article class="project-card">
+          <h3 class="project-title">打造穩定線上團課系統</h3>
+          <p>建立每週固定直播課程，透過課程規劃與互動技巧，累積長期學員。</p>
+          <p class="project-more">
+            課程協助學員建立固定開課流程、課後追蹤制度與社群互動方式，提升學員續課率。
+          </p>
+          <button class="project-button" type="button">查看更多</button>
+        </article>
+
+        <article class="project-card">
+          <h3 class="project-title">建立個人教練品牌</h3>
+          <p>透過社群經營、專業內容輸出與學員見證，成功打造個人品牌與招生系統。</p>
+          <p class="project-more">
+            從品牌定位、課程包裝到招生文案，協助學員把專業能力轉換成可被看見的服務。
+          </p>
+          <button class="project-button" type="button">查看更多</button>
+        </article>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION:PROJECTS-END -->
+
+  <!-- SECTION:CONTACT-START -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact 立即報名</h2>
+      <p class="section-subtitle">留下資料，我們將盡快與您聯繫。</p>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3 class="contact-info-title">聯絡資訊</h3>
+          <p>電話：04-0000-0000</p>
+          <p>Email：coach@example.com</p>
+          <p>LINE：@fitnesscoach</p>
+        </div>
+
+        <form class="contact-form" novalidate>
+          <h3 class="form-title">報名表單</h3>
+
+          <div class="form-group">
+            <label class="form-label">姓名 *</label>
+            <input class="form-input name-input" type="text">
+            <p class="error-message name-error"></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">手機號碼 *</label>
+            <input class="form-input phone-input" type="tel" placeholder="09xxxxxxxx">
+            <p class="error-message phone-error"></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email *</label>
+            <input class="form-input email-input" type="email">
+            <p class="error-message email-error"></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">LINE ID</label>
+            <input class="form-input" type="text">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">年齡</label>
+            <input class="form-input" type="number">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">運動相關經驗</label>
+            <select class="form-select">
+              <option>無經驗</option>
+              <option>有自我訓練經驗</option>
+              <option>有教學經驗</option>
+              <option>已是運動教練</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">想學習的課程內容</label>
+            <select class="form-select">
+              <option>線上帶課技巧</option>
+              <option>動作評估與指導</option>
+              <option>課程設計與訓練規劃</option>
+              <option>教練品牌經營</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">備註留言</label>
+            <textarea class="form-textarea"></textarea>
+          </div>
+
+          <button class="primary-button" type="submit">送出報名資料</button>
+          <p class="success-message">報名資料已送出，我們將盡快與您聯繫！</p>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION:CONTACT-END -->
+
+  <!-- SECTION:FOOTER-START -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 FitCoach Online. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <!-- SECTION:FOOTER-END -->
+
+  <!-- SECTION:BACKTOTOP-START -->
+  <button class="back-top-button" type="button" aria-label="回到頂部">↑</button>
+  <!-- SECTION:BACKTOTOP-END -->
+
+  <script>
+    /* JS:HEADER-START */
+    const menuButton = document.querySelector('.menu-button');
+    const navList = document.querySelector('.nav-list');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    menuButton.addEventListener('click', function () {
+      navList.classList.toggle('active');
+    });
+
+    navLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
+        navList.classList.remove('active');
+      });
+    });
+    /* JS:HEADER-END */
+
+    /* JS:HERO-START */
+    const scrollButtons = document.querySelectorAll('.scroll-button');
+
+    scrollButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        const targetClass = button.dataset.target;
+        const targetSection = document.querySelector('#' + targetClass);
+
+        if (targetSection) {
+          targetSection.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    /* JS:HERO-END */
+
+    /* JS:SKILLS-START */
+    const skillCards = document.querySelectorAll('.skill-card');
+
+    skillCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        card.classList.toggle('active');
+      });
+    });
+    /* JS:SKILLS-END */
+
+    /* JS:PROJECTS-START */
+    const projectButtons = document.querySelectorAll('.project-button');
+
+    projectButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        const projectCard = button.closest('.project-card');
+        projectCard.classList.toggle('active');
+
+        if (projectCard.classList.contains('active')) {
+          button.textContent = '收起內容';
+        } else {
+          button.textContent = '查看更多';
+        }
+      });
+    });
+    /* JS:PROJECTS-END */
+
+    /* JS:CONTACT-START */
+    const contactForm = document.querySelector('.contact-form');
+    const nameInput = document.querySelector('.name-input');
+    const phoneInput = document.querySelector('.phone-input');
+    const emailInput = document.querySelector('.email-input');
+
+    const nameError = document.querySelector('.name-error');
+    const phoneError = document.querySelector('.phone-error');
+    const emailError = document.querySelector('.email-error');
+    const successMessage = document.querySelector('.success-message');
+
+    contactForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      let isValid = true;
+
+      nameError.textContent = '';
+      phoneError.textContent = '';
+      emailError.textContent = '';
+      successMessage.style.display = 'none';
+
+      const phoneRegex = /^09\d{8}$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (nameInput.value.trim() === '') {
+        nameError.textContent = '請輸入姓名';
+        isValid = false;
+      }
+
+      if (phoneInput.value.trim() === '') {
+        phoneError.textContent = '請輸入手機號碼';
+        isValid = false;
+      } else if (!phoneRegex.test(phoneInput.value.trim())) {
+        phoneError.textContent = '手機格式需為 09 開頭，共 10 碼';
+        isValid = false;
+      }
+
+      if (emailInput.value.trim() === '') {
+        emailError.textContent = '請輸入 Email';
+        isValid = false;
+      } else if (!emailRegex.test(emailInput.value.trim())) {
+        emailError.textContent = '請輸入正確 Email 格式';
+        isValid = false;
+      }
+
+      if (isValid) {
+        successMessage.style.display = 'block';
+        contactForm.reset();
+      }
+    });
+    /* JS:CONTACT-END */
+
+    /* JS:BACKTOTOP-START */
+    const backTopButton = document.querySelector('.back-top-button');
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 400) {
+        backTopButton.classList.add('show');
+      } else {
+        backTopButton.classList.remove('show');
+      }
+    });
+
+    backTopButton.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    /* JS:BACKTOTOP-END */
+  </script>
+</body>
+</html>
